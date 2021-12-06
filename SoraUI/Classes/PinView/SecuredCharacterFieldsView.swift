@@ -13,6 +13,22 @@ open class SecuredCharacterFieldsView: BaseCharacterFieldsView {
         public let highlightedStrokeColor: UIColor
         public let strokeWidth: CGFloat
         public let fieldRadius: CGFloat
+
+        public init(
+            normalFillColor: UIColor,
+            highlightedFillColor: UIColor,
+            normalStrokeColor: UIColor,
+            highlightedStrokeColor: UIColor,
+            strokeWidth: CGFloat,
+            fieldRadius: CGFloat
+        ) {
+            self.normalFillColor = normalFillColor
+            self.highlightedFillColor = highlightedFillColor
+            self.normalStrokeColor = normalStrokeColor
+            self.highlightedStrokeColor = highlightedStrokeColor
+            self.strokeWidth = strokeWidth
+            self.fieldRadius = fieldRadius
+        }
     }
 
     open var style: Style = Style(
