@@ -192,7 +192,7 @@ open class NumpadView: UIView {
     /**
      *  Represents unique style for backspace button. If not set then default property is used.
      */
-    public var acceessoryButtonStyle: NumpadButtonStyle? {
+    public var accessoryButtonStyle: NumpadButtonStyle? {
         didSet {
             applyAccessoryButtonStyle()
         }
@@ -408,13 +408,13 @@ open class NumpadView: UIView {
     private func applyFillColor(_ color: UIColor) {
         enumerateNumBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.fillColor = color }
         _backspaceButton?.roundedBackgroundView?.fillColor = backspaceButtonStyle?.fillColor ?? color
-        _accessoryButton?.roundedBackgroundView?.highlightedFillColor = acceessoryButtonStyle?.fillColor ?? color
+        _accessoryButton?.roundedBackgroundView?.highlightedFillColor = accessoryButtonStyle?.fillColor ?? color
     }
 
     private func applyHighlightedFillColor(_ color: UIColor) {
         enumerateNumBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.highlightedFillColor = color }
         _backspaceButton?.roundedBackgroundView?.highlightedFillColor = backspaceButtonStyle?.highlightedFillColor ?? color
-        _accessoryButton?.roundedBackgroundView?.highlightedFillColor = acceessoryButtonStyle?.highlightedFillColor ?? color
+        _accessoryButton?.roundedBackgroundView?.highlightedFillColor = accessoryButtonStyle?.highlightedFillColor ?? color
     }
 
     private func applyNumTitleColor(_ color: UIColor) {
@@ -432,25 +432,25 @@ open class NumpadView: UIView {
     private func applyShadowOpacity(_ opacity: Float) {
         enumerateNumBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.shadowOpacity = opacity }
         _backspaceButton?.roundedBackgroundView?.shadowOpacity = backspaceButtonStyle?.shadowOpacity ?? opacity
-        _accessoryButton?.roundedBackgroundView?.shadowOpacity = acceessoryButtonStyle?.shadowOpacity ?? opacity
+        _accessoryButton?.roundedBackgroundView?.shadowOpacity = accessoryButtonStyle?.shadowOpacity ?? opacity
     }
 
     private func applyShadowColor(_ color: UIColor) {
         enumerateNumBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.shadowColor = color }
         _backspaceButton?.roundedBackgroundView?.shadowColor = backspaceButtonStyle?.shadowColor ?? color
-        _accessoryButton?.roundedBackgroundView?.shadowColor = acceessoryButtonStyle?.shadowColor ?? color
+        _accessoryButton?.roundedBackgroundView?.shadowColor = accessoryButtonStyle?.shadowColor ?? color
     }
 
     private func applyShadowRadius(_ radius: CGFloat) {
         enumerateNumBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.shadowRadius = radius }
         _backspaceButton?.roundedBackgroundView?.shadowRadius = backspaceButtonStyle?.shadowRadius ?? radius
-        _accessoryButton?.roundedBackgroundView?.shadowRadius = acceessoryButtonStyle?.shadowRadius ?? radius
+        _accessoryButton?.roundedBackgroundView?.shadowRadius = accessoryButtonStyle?.shadowRadius ?? radius
     }
 
     private func applyShadowOffset(_ offset: CGSize) {
         enumerateNumBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.shadowOffset = offset }
         _backspaceButton?.roundedBackgroundView?.shadowOffset = backspaceButtonStyle?.shadowOffset ?? offset
-        _accessoryButton?.roundedBackgroundView?.shadowOffset = acceessoryButtonStyle?.shadowOffset ?? offset
+        _accessoryButton?.roundedBackgroundView?.shadowOffset = accessoryButtonStyle?.shadowOffset ?? offset
     }
 
     private func applyBackspaceButtonStyle() {
@@ -473,22 +473,22 @@ open class NumpadView: UIView {
     }
 
     private func applyAccessoryButtonStyle() {
-        if let color = acceessoryButtonStyle?.fillColor ?? fillColor {
+        if let color = accessoryButtonStyle?.fillColor ?? fillColor {
             _accessoryButton?.roundedBackgroundView?.fillColor = color
         }
 
-        if let color = acceessoryButtonStyle?.highlightedFillColor ?? highlightedFillColor {
+        if let color = accessoryButtonStyle?.highlightedFillColor ?? highlightedFillColor {
             _accessoryButton?.roundedBackgroundView?.highlightedFillColor = color
         }
 
-        _accessoryButton?.roundedBackgroundView?.shadowOpacity = acceessoryButtonStyle?.shadowOpacity ?? shadowOpacity
+        _accessoryButton?.roundedBackgroundView?.shadowOpacity = accessoryButtonStyle?.shadowOpacity ?? shadowOpacity
 
-        if let color = acceessoryButtonStyle?.shadowColor ?? shadowColor {
+        if let color = accessoryButtonStyle?.shadowColor ?? shadowColor {
             _accessoryButton?.roundedBackgroundView?.shadowColor = color
         }
 
-        _accessoryButton?.roundedBackgroundView?.shadowRadius = acceessoryButtonStyle?.shadowRadius ?? shadowRadius
-        _accessoryButton?.roundedBackgroundView?.shadowOffset = acceessoryButtonStyle?.shadowOffset ?? shadowOffset
+        _accessoryButton?.roundedBackgroundView?.shadowRadius = accessoryButtonStyle?.shadowRadius ?? shadowRadius
+        _accessoryButton?.roundedBackgroundView?.shadowOffset = accessoryButtonStyle?.shadowOffset ?? shadowOffset
     }
 
     // MARK: Actions
