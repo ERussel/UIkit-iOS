@@ -30,7 +30,7 @@ open class NumpadView: UIView {
     public var fillColor: UIColor? {
         set(newValue) {
             guard let color = newValue else { return }
-            applyNumFillColor(color)
+            applyFillColor(color)
         }
 
         get { return anyNumBackgroundView()?.fillColor }
@@ -40,7 +40,7 @@ open class NumpadView: UIView {
     public var highlightedFillColor: UIColor? {
         set(newValue) {
             guard let color = newValue else { return }
-            applyNumHighlightedFillColor(color)
+            applyHighlightedFillColor(color)
         }
 
         get { return anyNumBackgroundView()?.highlightedFillColor}
@@ -177,6 +177,24 @@ open class NumpadView: UIView {
 
         get {
             return _accessoryButton != nil
+        }
+    }
+
+    /**
+     *  Represents unique style for backspace button. If not set then default property is used.
+     */
+    public var backspaceButtonStyle: NumpadButtonStyle? {
+        didSet {
+            applyBackspaceButtonStyle()
+        }
+    }
+
+    /**
+     *  Represents unique style for backspace button. If not set then default property is used.
+     */
+    public var accessoryButtonStyle: NumpadButtonStyle? {
+        didSet {
+            applyAccessoryButtonStyle()
         }
     }
 
@@ -382,15 +400,21 @@ open class NumpadView: UIView {
     }
 
     private func applyKeyRadius(_ keyRadius: CGFloat) {
-        enumerateBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.cornerRadius = keyRadius }
+        enumerateNumBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.cornerRadius = keyRadius }
+        _backspaceButton?.roundedBackgroundView?.cornerRadius = keyRadius
+        _accessoryButton?.roundedBackgroundView?.cornerRadius = keyRadius
     }
 
-    private func applyNumFillColor(_ color: UIColor) {
-        enumerateBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.fillColor = color }
+    private func applyFillColor(_ color: UIColor) {
+        enumerateNumBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.fillColor = color }
+        _backspaceButton?.roundedBackgroundView?.fillColor = backspaceButtonStyle?.fillColor ?? color
+        _accessoryButton?.roundedBackgroundView?.highlightedFillColor = accessoryButtonStyle?.fillColor ?? color
     }
 
-    private func applyNumHighlightedFillColor(_ color: UIColor) {
-        enumerateBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.highlightedFillColor = color }
+    private func applyHighlightedFillColor(_ color: UIColor) {
+        enumerateNumBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.highlightedFillColor = color }
+        _backspaceButton?.roundedBackgroundView?.highlightedFillColor = backspaceButtonStyle?.highlightedFillColor ?? color
+        _accessoryButton?.roundedBackgroundView?.highlightedFillColor = accessoryButtonStyle?.highlightedFillColor ?? color
     }
 
     private func applyNumTitleColor(_ color: UIColor) {
@@ -406,19 +430,65 @@ open class NumpadView: UIView {
     }
 
     private func applyShadowOpacity(_ opacity: Float) {
-        enumerateBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.shadowOpacity = opacity }
+        enumerateNumBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.shadowOpacity = opacity }
+        _backspaceButton?.roundedBackgroundView?.shadowOpacity = backspaceButtonStyle?.shadowOpacity ?? opacity
+        _accessoryButton?.roundedBackgroundView?.shadowOpacity = accessoryButtonStyle?.shadowOpacity ?? opacity
     }
 
     private func applyShadowColor(_ color: UIColor) {
-        enumerateBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.shadowColor = color }
+        enumerateNumBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.shadowColor = color }
+        _backspaceButton?.roundedBackgroundView?.shadowColor = backspaceButtonStyle?.shadowColor ?? color
+        _accessoryButton?.roundedBackgroundView?.shadowColor = accessoryButtonStyle?.shadowColor ?? color
     }
 
     private func applyShadowRadius(_ radius: CGFloat) {
-        enumerateBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.shadowRadius = radius }
+        enumerateNumBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.shadowRadius = radius }
+        _backspaceButton?.roundedBackgroundView?.shadowRadius = backspaceButtonStyle?.shadowRadius ?? radius
+        _accessoryButton?.roundedBackgroundView?.shadowRadius = accessoryButtonStyle?.shadowRadius ?? radius
     }
 
     private func applyShadowOffset(_ offset: CGSize) {
-        enumerateBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.shadowOffset = offset }
+        enumerateNumBackgrounds { (backgroundView: RoundedView) -> Void in backgroundView.shadowOffset = offset }
+        _backspaceButton?.roundedBackgroundView?.shadowOffset = backspaceButtonStyle?.shadowOffset ?? offset
+        _accessoryButton?.roundedBackgroundView?.shadowOffset = accessoryButtonStyle?.shadowOffset ?? offset
+    }
+
+    private func applyBackspaceButtonStyle() {
+        if let color = backspaceButtonStyle?.fillColor ?? fillColor {
+            _backspaceButton?.roundedBackgroundView?.fillColor = color
+        }
+
+        if let color = backspaceButtonStyle?.highlightedFillColor ?? highlightedFillColor {
+            _backspaceButton?.roundedBackgroundView?.highlightedFillColor = color
+        }
+
+        _backspaceButton?.roundedBackgroundView?.shadowOpacity = backspaceButtonStyle?.shadowOpacity ?? shadowOpacity
+
+        if let color = backspaceButtonStyle?.shadowColor ?? shadowColor {
+            _backspaceButton?.roundedBackgroundView?.shadowColor = color
+        }
+
+        _backspaceButton?.roundedBackgroundView?.shadowRadius = backspaceButtonStyle?.shadowRadius ?? shadowRadius
+        _backspaceButton?.roundedBackgroundView?.shadowOffset = backspaceButtonStyle?.shadowOffset ?? shadowOffset
+    }
+
+    private func applyAccessoryButtonStyle() {
+        if let color = accessoryButtonStyle?.fillColor ?? fillColor {
+            _accessoryButton?.roundedBackgroundView?.fillColor = color
+        }
+
+        if let color = accessoryButtonStyle?.highlightedFillColor ?? highlightedFillColor {
+            _accessoryButton?.roundedBackgroundView?.highlightedFillColor = color
+        }
+
+        _accessoryButton?.roundedBackgroundView?.shadowOpacity = accessoryButtonStyle?.shadowOpacity ?? shadowOpacity
+
+        if let color = accessoryButtonStyle?.shadowColor ?? shadowColor {
+            _accessoryButton?.roundedBackgroundView?.shadowColor = color
+        }
+
+        _accessoryButton?.roundedBackgroundView?.shadowRadius = accessoryButtonStyle?.shadowRadius ?? shadowRadius
+        _accessoryButton?.roundedBackgroundView?.shadowOffset = accessoryButtonStyle?.shadowOffset ?? shadowOffset
     }
 
     // MARK: Actions
@@ -450,21 +520,15 @@ open class NumpadView: UIView {
         }
     }
 
-    private func enumerateBackgrounds(with block: (RoundedView) -> Void) {
-        if let buttons = _buttons {
-            for numButton in buttons {
-                if let roundedView = numButton.roundedBackgroundView {
-                    block(roundedView)
-                }
+    private func enumerateNumBackgrounds(with block: (RoundedView) -> Void) {
+        guard let buttons = _buttons else {
+            return
+        }
+
+        for numButton in buttons {
+            if let roundedView = numButton.roundedBackgroundView {
+                block(roundedView)
             }
-        }
-
-        if let roundedView = _backspaceButton?.roundedBackgroundView {
-            block(roundedView)
-        }
-
-        if let roundedView = _accessoryButton?.roundedBackgroundView {
-            block(roundedView)
         }
     }
 
