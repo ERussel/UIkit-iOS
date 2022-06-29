@@ -8,7 +8,7 @@ import UIKit
 public class ModalSheetPresentationFactory: NSObject {
     let configuration: ModalSheetPresentationConfiguration
 
-    var presentation: ModalSheetPresentationController?
+    weak var presentation: ModalSheetPresentationController?
 
     public init(configuration: ModalSheetPresentationConfiguration) {
         self.configuration = configuration
@@ -32,9 +32,12 @@ extension ModalSheetPresentationFactory: UIViewControllerTransitioningDelegate {
 
     public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?,
                                        source: UIViewController) -> UIPresentationController? {
-        presentation = ModalSheetPresentationController(presentedViewController: presented,
-                                                        presenting: presenting,
-                                                        configuration: configuration)
+        let presentation = ModalSheetPresentationController(presentedViewController: presented,
+                                                            presenting: presenting,
+                                                            configuration: configuration)
+
+        self.presentation = presentation
+
         return presentation
     }
 
