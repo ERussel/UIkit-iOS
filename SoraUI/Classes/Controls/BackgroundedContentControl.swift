@@ -134,6 +134,10 @@ open class BackgroundedContentControl: UIControl {
 
     override open var isHighlighted: Bool {
         didSet {
+            guard isEnabled else {
+                return
+            }
+            
             applyHighlightedStateIfSupporting(view: backgroundView, animated: false)
             applyContentHighlightedState(animated: false)
         }
@@ -150,6 +154,10 @@ open class BackgroundedContentControl: UIControl {
 
     override open var isSelected: Bool {
         didSet {
+            guard isEnabled else {
+                return
+            }
+            
             applyHighlightedStateIfSupporting(view: backgroundView, animated: false)
             applyContentHighlightedState(animated: false)
         }
