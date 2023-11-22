@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SoraUI'
-  s.version          = '1.11.1'
+  s.version          = '1.12.0'
   s.summary          = 'UI Library for design and layout process simplification.'
 
   s.description      = 'Library contains views and controls that simplifies design and layout implementation manually in code or utilizing interface build.'
