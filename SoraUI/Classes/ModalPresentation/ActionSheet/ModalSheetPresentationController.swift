@@ -10,6 +10,7 @@ class ModalSheetPresentationController: UIPresentationController {
 
     private var backgroundView: UIView?
     private var headerView: RoundedView?
+    private var headerIndicatorView: RoundedView?
 
     var interactiveDismissal: UIPercentDrivenInteractiveTransition?
     var initialTranslation: CGPoint = .zero
@@ -80,18 +81,25 @@ class ModalSheetPresentationController: UIPresentationController {
 
             baseView.addSubview(indicator)
 
-            let indicatorX = width / 2.0 - style.indicatorSize.width / 2.0
-            indicator.frame = CGRect(origin: CGPoint(x: indicatorX, y: style.indicatorVerticalOffset), size: style.indicatorSize)
-
             view.insertSubview(baseView, at: 0)
 
+            headerIndicatorView = indicator
             headerView = baseView
         }
 
-        headerView?.frame = CGRect(x: 0.0,
-                                   y: -style.preferredHeight + 0.5,
-                                   width: width,
-                                   height: style.preferredHeight)
+        configureHeaderFrame(for: style, preferredWidth: width)
+    }
+    
+    private func configureHeaderFrame(for style: ModalSheetPresentationHeaderStyle, preferredWidth: CGFloat) {
+        let indicatorX = preferredWidth / 2.0 - style.indicatorSize.width / 2.0
+        headerIndicatorView?.frame = CGRect(origin: CGPoint(x: indicatorX, y: style.indicatorVerticalOffset), size: style.indicatorSize)
+        
+        headerView?.frame = CGRect(
+            x: 0.0,
+            y: -style.preferredHeight + 0.5,
+            width: preferredWidth,
+            height: style.preferredHeight
+        )
     }
 
     private func attachCancellationGesture() {
@@ -127,6 +135,23 @@ class ModalSheetPresentationController: UIPresentationController {
 
     override func dismissalTransitionWillBegin() {
         animateBackgroundAlpha(fromValue: 1.0, toValue: 0.0)
+    }
+    
+    override func containerViewWillLayoutSubviews() {
+        super.containerViewWillLayoutSubviews()
+        
+        guard let containerView = containerView else {
+            return
+        }
+        
+        backgroundView?.frame = containerView.bounds
+        
+        if let headerStyle = configuration.style.headerStyle {
+            configureHeaderFrame(for: headerStyle, preferredWidth: containerView.bounds.width)
+        }
+        
+        let presentedFrame = frameOfPresentedViewInContainerView
+        presentedViewController.view.frame = presentedFrame
     }
 
     override var frameOfPresentedViewInContainerView: CGRect {
