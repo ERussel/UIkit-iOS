@@ -201,21 +201,22 @@ class ModalSheetPresentationController: UIPresentationController {
             .animate(alongsideTransition: animationBlock, completion: nil)
     }
 
-    func dismiss(animated: Bool) {
-        presentedViewController.dismiss(animated: animated, completion: nil)
+    func dismiss(animated: Bool, completion: (() -> Void)?) {
+        presentedViewController.dismiss(animated: animated, completion: completion)
     }
 
     // MARK: Action
 
     @objc func actionDidCancel(gesture: UITapGestureRecognizer) {
         guard let presenterDelegate = presenterDelegate else {
-            dismiss(animated: true)
+            dismiss(animated: true, completion: nil)
             return
         }
 
         if presenterDelegate.presenterShouldHide(self) {
-            dismiss(animated: true)
-            presenterDelegate.presenterDidHide(self)
+            dismiss(animated: true) {
+                presenterDelegate.presenterDidHide(self)
+            }
         }
     }
 
@@ -282,12 +283,12 @@ class ModalSheetPresentationController: UIPresentationController {
 }
 
 extension ModalSheetPresentationController: ModalPresenterProtocol {
-    func hide(view: ModalViewProtocol, animated: Bool) {
+    func hide(view: ModalViewProtocol, animated: Bool, completion: (() -> Void)?) {
         guard interactiveDismissal == nil else {
             return
         }
 
-        dismiss(animated: animated)
+        dismiss(animated: animated, completion: completion)
     }
 }
 
