@@ -1,36 +1,36 @@
 PODS:
-  - SoraUI (1.11.1):
-    - SoraUI/AdaptiveDesign (= 1.11.1)
-    - SoraUI/Animator (= 1.11.1)
-    - SoraUI/Camera (= 1.11.1)
-    - SoraUI/Controls (= 1.11.1)
-    - SoraUI/DetailsView (= 1.11.1)
-    - SoraUI/EmptyState (= 1.11.1)
-    - SoraUI/Helpers (= 1.11.1)
-    - SoraUI/LoadingView (= 1.11.1)
-    - SoraUI/ModalPresentation (= 1.11.1)
-    - SoraUI/PageLoader (= 1.11.1)
-    - SoraUI/PinView (= 1.11.1)
-    - SoraUI/Skrull (= 1.11.1)
-  - SoraUI/AdaptiveDesign (1.11.1)
-  - SoraUI/Animator (1.11.1)
-  - SoraUI/Camera (1.11.1)
-  - SoraUI/Controls (1.11.1):
+  - SoraUI (1.14.0):
+    - SoraUI/AdaptiveDesign (= 1.14.0)
+    - SoraUI/Animator (= 1.14.0)
+    - SoraUI/Camera (= 1.14.0)
+    - SoraUI/Controls (= 1.14.0)
+    - SoraUI/DetailsView (= 1.14.0)
+    - SoraUI/EmptyState (= 1.14.0)
+    - SoraUI/Helpers (= 1.14.0)
+    - SoraUI/LoadingView (= 1.14.0)
+    - SoraUI/ModalPresentation (= 1.14.0)
+    - SoraUI/PageLoader (= 1.14.0)
+    - SoraUI/PinView (= 1.14.0)
+    - SoraUI/Skrull (= 1.14.0)
+  - SoraUI/AdaptiveDesign (1.14.0)
+  - SoraUI/Animator (1.14.0)
+  - SoraUI/Camera (1.14.0)
+  - SoraUI/Controls (1.14.0):
     - SoraUI/Animator
-  - SoraUI/DetailsView (1.11.1):
+  - SoraUI/DetailsView (1.14.0):
     - SoraUI/Controls
-  - SoraUI/EmptyState (1.11.1):
+  - SoraUI/EmptyState (1.14.0):
     - SoraUI/Animator
-  - SoraUI/Helpers (1.11.1)
-  - SoraUI/LoadingView (1.11.1):
+  - SoraUI/Helpers (1.14.0)
+  - SoraUI/LoadingView (1.14.0):
     - SoraUI/Controls
-  - SoraUI/ModalPresentation (1.11.1):
+  - SoraUI/ModalPresentation (1.14.0):
     - SoraUI/Animator
     - SoraUI/Controls
-  - SoraUI/PageLoader (1.11.1)
-  - SoraUI/PinView (1.11.1):
+  - SoraUI/PageLoader (1.14.0)
+  - SoraUI/PinView (1.14.0):
     - SoraUI/Controls
-  - SoraUI/Skrull (1.11.1)
+  - SoraUI/Skrull (1.14.0)
 
 DEPENDENCIES:
   - SoraUI (from `../`)
@@ -40,8 +40,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SoraUI: e5ceb2cffe40145e589aa464e2e0a8d054011e0b
+  SoraUI: b6528310c986fd7d15d0270322455dda78c0ecbf
 
 PODFILE CHECKSUM: bb766dae3a5ddd7acf3a123997936163f86b09c0
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.15.2
