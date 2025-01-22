@@ -180,8 +180,8 @@ class ModalAlertPresentationController: UIPresentationController {
             .animate(alongsideTransition: animationBlock, completion: nil)
     }
 
-    func dismiss(animated: Bool) {
-        presentedViewController.dismiss(animated: animated, completion: nil)
+    func dismiss(animated: Bool, completion: (() -> Void)? = nil) {
+        presentedViewController.dismiss(animated: animated, completion: completion)
     }
 
     // MARK: Action
@@ -202,7 +202,7 @@ class ModalAlertPresentationController: UIPresentationController {
 }
 
 extension ModalAlertPresentationController: ModalPresenterProtocol {
-    func hide(view: ModalViewProtocol, animated: Bool) {
+    func hide(view: ModalViewProtocol, animated: Bool, completion: (() -> Void)?) {
         guard interactiveDismissal == nil else {
             return
         }

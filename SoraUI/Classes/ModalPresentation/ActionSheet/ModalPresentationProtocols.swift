@@ -11,7 +11,13 @@ public protocol ModalViewProtocol: AnyObject {
 }
 
 public protocol ModalPresenterProtocol: AnyObject {
-    func hide(view: ModalViewProtocol, animated: Bool)
+    func hide(view: ModalViewProtocol, animated: Bool, completion: (() -> Void)?)
+}
+
+public extension ModalPresenterProtocol {
+    func hide(view: ModalViewProtocol, animated: Bool) {
+        hide(view: view, animated: animated, completion: nil)
+    }
 }
 
 public protocol ModalPresenterDelegate: AnyObject {
